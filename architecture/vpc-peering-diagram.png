@@ -1,0 +1,23 @@
+AWS Account / N. Virginia (us-east-1)           AWS Account / Mumbai (ap-south-1)
+┌──────────────────────────┐                  ┌──────────────────────────┐
+│        Amazon VPC        │                  │        Amazon VPC        │
+│      CIDR: 10.0.0.0/16   │                  │    CIDR: 172.16.0.0/16   │
+│                          │                  │                          │
+│  ┌───────────────────┐  │                  │  ┌───────────────────┐  │
+│  │ Private Subnet    │  │                  │  │ Private Subnet    │  │
+│  │ 10.0.1.0/24       │  │                  │  │ 172.16.1.0/24     │  │
+│  │                   │  │                  │  │                   │  │
+│  │ EC2 Instance A    │  │                  │  │ EC2 Instance B    │  │
+│  │ Private IP:       │  │                  │  │ Private IP:       │  │
+│  │ 10.0.1.215        │  │                  │  │ 172.16.1.135      │  │
+│  └───────────────────┘  │                  │  └───────────────────┘  │
+│                          │                  │                          │
+│  Route Table             │                  │  Route Table             │
+│  172.16.0.0/16 → pcx-id │                  │  10.0.0.0/16 → pcx-id   │
+│                          │                  │                          │
+│  Internet Gateway        │                  │  Internet Gateway        │
+│  (Not used for peering)  │                  │  (Not used for peering)  │
+└───────────▲──────────────┘                  └───────────▲──────────────┘
+            │                                                     │
+            └────────── VPC Peering Connection ──────────────────┘
+                (Private traffic over AWS backbone)
